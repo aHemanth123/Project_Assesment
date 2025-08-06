@@ -33,12 +33,20 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes); // ✅ This now works
 
-if(process.env.NODE_ENV==="production"){
-  app.use(express.static(path.join(__dirname,"../vite-project/dist")));
-   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+// if(process.env.NODE_ENV==="production"){
+//   app.use(express.static(path.join(__dirname,"../vite-project/dist")));
+//    app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+//   });
+// }
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../vite-project/dist")));
+  
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../vite-project", "dist", "index.html"));
   });
 }
+
 
 app.listen(PORT, () => {
   connectToMongoDB();
