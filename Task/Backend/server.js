@@ -17,12 +17,6 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(cors({
-  origin: "http://localhost:5173", // ❌ Remove the trailing space!
-  credentials: true, // ✅ Required for cookies to be shared
-}));
-
-
 const PORT = process.env.PORT || 5000;
 
 const __dirname=path.resolve();
@@ -33,16 +27,14 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes); // ✅ This now works
 
-// if(process.env.NODE_ENV==="production"){
-//   app.use(express.static(path.join(__dirname,"../vite-project/dist")));
-//    app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-//   });
-// }
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../vite-project/dist")));
-  
-  app.get("*", (req, res) => {
+
+
+console.log(process.env.NODE_ENV)
+if(process.env.NODE_ENV==="production"){
+  console.log("proffff")
+  console.log(__dirname)
+  app.use(express.static(path.join(__dirname,"../vite-project/dist")));
+   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../vite-project", "dist", "index.html"));
   });
 }

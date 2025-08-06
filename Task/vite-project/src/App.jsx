@@ -4,7 +4,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 
 // Axios config
-axios.defaults.baseURL = "http://localhost:8000";
+// axios.defaults.baseURL = "http://localhost:8000";
+baseURL: import.meta.env.MODE === "development" ? "http://localhost:8000/api" : "/api",
 axios.defaults.withCredentials = true;
 
 // ----- Product CRUD Component -----

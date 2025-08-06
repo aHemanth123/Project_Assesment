@@ -191,65 +191,6 @@ import Product from "../Model/product_model.js";
 
 const router = express.Router();
 
-// ✅ GET: Get products created by the logged-in user
-// router.get("/", authMiddleware, async (req, res) => {
-//   try {
-//     const { category, shipped, page = 1, limit = 10 } = req.query;
-//     const userId = req.user.userID; // ⬅️ Use userID from token
-
-//     const query = { createdBy: userId }; // ⬅️ match createdBy
-
-//     if (category) query.category = new RegExp(`^${category}$`, "i");
-//     if (shipped !== undefined) query.shipped = shipped === "true";
-
-//     const total = await Product.countDocuments(query);
-//     const products = await Product.find(query)
-//       .skip((page - 1) * limit)
-//       .limit(Number(limit));
-
-//     res.json({
-//       total,
-//       page: Number(page),
-//       limit: Number(limit),
-//       products,
-//     });
-//   } catch (err) {
-//     console.error("GET error:", err);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-
-// router.get("/", authMiddleware, async (req, res) => {
-//   try {
-//     const { category, shipped, page = 1, limit = 10 } = req.query;
-//     const userId = req.user.userID; // ✅ Consistent with token payload
-
-//     console.log("Fetching products for user:", userId);
-
-//     const query = { createdBy: userId };
-
-//     if (category) query.category = new RegExp(`^${category}$`, "i");
-//     if (shipped !== undefined) query.shipped = shipped === "true";
-
-//     const total = await Product.countDocuments(query);
-
-//     const products = await Product.find(query)
-//       .sort({ createdAt: -1 }) // ✅ Optional: latest first
-//       .skip((page - 1) * limit)
-//       .limit(Number(limit));
-
-//     res.json({
-//       total,
-//       page: Number(page),
-//       limit: Number(limit),
-//       products,
-//     });
-//   } catch (err) {
-//     console.error("GET /products error:", err);
-//     res.status(500).json({ error: "Server error" });
-//   }
-// });
-
 router.get("/", authMiddleware, async (req, res) => {
   try {
     const { category, shipped } = req.query;
@@ -272,8 +213,6 @@ router.get("/", authMiddleware, async (req, res) => {
 });
 
 
-
-// ✅ POST: Add a new product
 router.post("/", authMiddleware, async (req, res) => {
   try {
     const { name, category, shipped } = req.body;
@@ -297,7 +236,6 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-// ✅ PUT: Update a product (only if owned by user)
 router.put("/:id", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
@@ -319,7 +257,6 @@ router.put("/:id", authMiddleware, async (req, res) => {
   }
 });
 
-// ✅ DELETE: Remove a product (only if owned by user)
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
