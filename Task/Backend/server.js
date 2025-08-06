@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectToMongoDB from "./db/connect_to_mongodb.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import path from 'path';
 
 // Route imports
 import authRoutes from "./Routes/authroutes.js";
@@ -24,12 +25,20 @@ app.use(cors({
 
 const PORT = process.env.PORT || 5000;
 
+const __dirname=path.resolve();
 app.use(express.json()); // To parse JSON request bodies
 app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes); // ✅ This now works
+
+if(process.env.NODE_ENV==="production"){
+  app.use(express.static(path.join(__dirname,"../vite-project/dist")));
+   app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 
 app.listen(PORT, () => {
   connectToMongoDB();

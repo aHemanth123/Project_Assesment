@@ -1,0 +1,21 @@
+{
+  "name": "project_assesment",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "build": "npm install --prefix Task/Backend && npm install --prefix Tak/vite-project && npm run build --prefix Task/vite-project",
+    "start":"npm run start --prefix Task/Backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aHemanth123/Project_Assesment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aHemanth123/Project_Assesment/issues"
+  },
+  "homepage": "https://github.com/aHemanth123/Project_Assesment#readme",
+  "description": ""
+}
