@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "build": "npm install --prefix Task/Backend && npm install --prefix Tak/vite-project && npm run build --prefix Task/vite-project",
-    "start":"npm run start --prefix Task/Backend"
+    "build": "npm install --prefix Backend && npm install --prefix vite-project && npm run build --prefix vite-project",
+    "start":"npm run start --prefix Backend"
   },
   "repository": {
     "type": "git",
